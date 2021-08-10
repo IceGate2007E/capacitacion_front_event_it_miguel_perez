@@ -23,19 +23,16 @@ const Civilization = () => {
             <p><b>Expansion:</b> {civilization.expansion}</p>
             <p><b>Army Type:</b> {civilization.army_type}</p>
             <p><b>Team Bonus:</b> {civilization.team_bonus}</p>
-            <p><b>Civilization Bonus:</b> {civilization.civilization_bonus}</p>
-        </div>
-    ) /*
-
+            <p><b>Civilization Bonus:</b></p>
             <ul>
                 {
-                    civilization.civilization_bonus.map(item => (
+                    civilization.civilization_bonus && civilization.civilization_bonus.map(item => (
                         <li>{item}</li>
                     ))
                 }
             </ul>
         </div>
-    )*/
+    )
 }
 
 export default Civilization
