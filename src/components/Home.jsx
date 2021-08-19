@@ -4,7 +4,9 @@ import {Link} from 'react-router-dom'
 const Home = () => {
 
     const [civilizations, setCivilizations] = useState([])
-
+    const [page, setPage] = useState(0)
+    const [quantity, setQuantity] = useState(10)
+    
     useEffect(() => {
         getData()
     }, [])
@@ -26,7 +28,7 @@ const Home = () => {
                     </tr>
                 </thead>
                 <tbody>{
-                    civilizations.map(item => (
+                    civilizations.slice(page*quantity, (page+1)*quantity).map(item => (
                         <tr key={item.id}>
                             <td>{item.id}</td>
                             <td>
@@ -38,6 +40,17 @@ const Home = () => {
                     ))
                 }</tbody>
             </table>
+            <br></br>
+            <button onClick={() => {if (page>0) setPage(page-1)}}>Prev</button>
+            <button onClick={() => {if (page<Math.floor(civilizations.length/quantity)) setPage(page+1)}}>Next</button>
+            <select onChange={(event) => {
+                setPage(0)
+                setQuantity(event.target.value)
+                }}>
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+                <option value={30}>30</option>
+            </select>
         </div>
     )
 }
