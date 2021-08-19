@@ -8,7 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {Button, Select, MenuItem, InputLabel} from '@material-ui/core'
+import {Button, Select, MenuItem, InputLabel, Icon} from '@material-ui/core'
 
 
 const Home = () => {
@@ -44,7 +44,7 @@ const Home = () => {
     return (
         <Fragment>
             <Typography variant='h3' color='primary' gutterBottom>
-                Age of Empires II Civilizations
+                Civilizations
             </Typography>
             <TableContainer component={Paper}>
                 <Table>
@@ -84,6 +84,7 @@ const Home = () => {
                 <Button
                     color='primary'
                     variant='contained'
+                    startIcon={<Icon>arrow_back_ios</Icon>}
                     disabled={page === 0}
                     onClick={() => {setPage(page-1)}}>
                     Prev
@@ -91,6 +92,7 @@ const Home = () => {
                 <Button
                     color='primary'
                     variant='contained'
+                    endIcon={<Icon>arrow_forward_ios</Icon>}
                     disabled={civilizations && page === Math.floor(civilizations.length/quantity)}
                     onClick={() => {setPage(page+1)}}>
                     Next

@@ -7,17 +7,13 @@ import {
 } from 'react-router-dom'
 import Home from './components/Home'
 import Civilization from './components/Civilization'
+import Navbar from './components/Navbar'
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <div className="container mt-3">
-        <div>
-          <Link to="/" className="btn btn-dark">
-            Home
-          </Link>
-        </div>
-        <hr />
         <Switch>
           <Route path="/:id">
             <Civilization />
