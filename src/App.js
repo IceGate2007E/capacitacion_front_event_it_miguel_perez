@@ -6,7 +6,7 @@ import {
   Link
 } from 'react-router-dom'
 import Home from './components/Home'
-import Civilization from './components/Civilization';
+import Civilization from './components/Civilization'
 
 function App() {
   return (

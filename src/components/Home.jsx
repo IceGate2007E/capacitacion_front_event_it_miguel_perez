@@ -1,21 +1,34 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
+import {CircularProgress, Grid} from '@material-ui/core'
 
 const Home = () => {
 
     const [civilizations, setCivilizations] = useState([])
     const [page, setPage] = useState(0)
     const [quantity, setQuantity] = useState(10)
+    const [loading, setLoading] = useState(false)
     
     useEffect(() => {
+        setLoading(true)
         getData()
     }, [])
 
     const getData = async () => {
-        const data = await fetch('https://age-of-empires-2-api.herokuapp.com/api/v1/civilizations')
+        const data = await fetch('https://age-of-empires-2-api.herokuapp.com/api/v1/civilizations').
+            then( res => {
+                setLoading(false)
+                return res
+            })
         const tmp = await data.json()
         setCivilizations(tmp.civilizations)
     }
+
+    if (loading) return (
+        <Grid container justify='center'>
+            <CircularProgress color='secondary' size={120}/>)
+        </Grid>
+    )
 
     return (
         <div>
