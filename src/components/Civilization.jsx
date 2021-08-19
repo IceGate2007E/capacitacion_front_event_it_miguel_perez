@@ -27,9 +27,11 @@ const Civilization = () => {
 
     if (loading) return (
         <Grid container justify='center'>
-            <CircularProgress color='secondary' size={120}/>)
+            <CircularProgress color='primary' size={120}/>)
         </Grid>
     )
+
+    civilization.name && (document.title = civilization.name)
 
     return (
         <div>

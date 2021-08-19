@@ -1,6 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
-import {CircularProgress, Grid} from '@material-ui/core'
+import {CircularProgress, Grid, Typography} from '@material-ui/core'
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
 
 const Home = () => {
 
@@ -26,34 +34,52 @@ const Home = () => {
 
     if (loading) return (
         <Grid container justify='center'>
-            <CircularProgress color='secondary' size={120}/>)
+            <CircularProgress color='primary' size={120}/>)
         </Grid>
     )
 
+    document.title = 'Civilizations'
+
     return (
         <div>
-            <h1>Age of Empires II - Civilizations</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th width="32">ID</th>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>{
-                    civilizations.slice(page*quantity, (page+1)*quantity).map(item => (
-                        <tr key={item.id}>
-                            <td>{item.id}</td>
-                            <td>
-                                <Link to={'/'+item.id} style={{textDecoration: 'none', color: 'grey'}}>
-                                    {item.name}
-                                </Link>
-                            </td> 
-                        </tr>
-                    ))
-                }</tbody>
-            </table>
-            <br></br>
+            <Typography variant='h3' color='primary' gutterBottom>
+                Age of Empires II Civilizations
+            </Typography>
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>
+                                <Typography variant='h6' color='primary'>
+                                    ID
+                                </Typography>
+                            </TableCell>
+                            <TableCell>
+                                <Typography variant='h6' color='primary'>
+                                    Name
+                                </Typography>
+                            </TableCell>  
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>{
+                        civilizations.slice(page*quantity, (page+1)*quantity).map(item => (
+                            <TableRow>
+                                <TableCell size='small' width={20} align='right'>
+                                    {item.id}
+                                </TableCell>
+                                <TableCell size='small'>
+                                    <Link to={'/'+item.id} style={{textDecoration: 'none'}}>
+                                        <Typography variant="body1" color="textPrimary">
+                                            {item.name}
+                                        </Typography>
+                                    </Link>
+                                </TableCell>
+                            </TableRow>
+                        ))
+                    }</TableBody>
+                </Table>
+            </TableContainer>
+            <Grid container justify='center'>
             <button onClick={() => {if (page>0) setPage(page-1)}}>Prev</button>
             <button onClick={() => {if (page<Math.floor(civilizations.length/quantity)) setPage(page+1)}}>Next</button>
             <select onChange={(event) => {
@@ -64,6 +90,7 @@ const Home = () => {
                 <option value={20}>20</option>
                 <option value={30}>30</option>
             </select>
+            </Grid>
         </div>
     )
 }
