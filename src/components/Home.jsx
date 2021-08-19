@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, Fragment} from 'react'
 import {Link} from 'react-router-dom'
 import {CircularProgress, Grid, Typography} from '@material-ui/core'
 import Table from '@material-ui/core/Table';
@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import {Button, Select, MenuItem, InputLabel} from '@material-ui/core'
 
 
 const Home = () => {
@@ -41,7 +42,7 @@ const Home = () => {
     document.title = 'Civilizations'
 
     return (
-        <div>
+        <Fragment>
             <Typography variant='h3' color='primary' gutterBottom>
                 Age of Empires II Civilizations
             </Typography>
@@ -80,18 +81,35 @@ const Home = () => {
                 </Table>
             </TableContainer>
             <Grid container justify='center'>
-            <button onClick={() => {if (page>0) setPage(page-1)}}>Prev</button>
-            <button onClick={() => {if (page<Math.floor(civilizations.length/quantity)) setPage(page+1)}}>Next</button>
-            <select onChange={(event) => {
-                setPage(Math.floor(page*(quantity/event.target.value)))
-                setQuantity(event.target.value)
-                }}>
-                <option value={10}>10</option>
-                <option value={20}>20</option>
-                <option value={30}>30</option>
-            </select>
+                <Button
+                    color='primary'
+                    variant='contained'
+                    disabled={page === 0}
+                    onClick={() => {setPage(page-1)}}>
+                    Prev
+                </Button>
+                <Button
+                    color='primary'
+                    variant='contained'
+                    disabled={civilizations && page === Math.floor(civilizations.length/quantity)}
+                    onClick={() => {setPage(page+1)}}>
+                    Next
+                </Button>
             </Grid>
-        </div>
+            <Grid container alignItems='center' justify='flex-end'>
+                <Typography variant='h6' color='primary'>
+                    Rows 
+                </Typography>
+                <Select variant='outlined' value={quantity} onChange={(event) => {
+                    setPage(Math.floor(page*(quantity/event.target.value)))
+                    setQuantity(event.target.value)
+                    }}>
+                    <MenuItem value={10}>10</MenuItem>
+                    <MenuItem value={20}>20</MenuItem>
+                    <MenuItem value={30}>30</MenuItem>
+                </Select>
+            </Grid>
+        </Fragment>
     )
 }
 
