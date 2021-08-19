@@ -44,7 +44,7 @@ const Home = () => {
             <button onClick={() => {if (page>0) setPage(page-1)}}>Prev</button>
             <button onClick={() => {if (page<Math.floor(civilizations.length/quantity)) setPage(page+1)}}>Next</button>
             <select onChange={(event) => {
-                setPage(0)
+                setPage(Math.floor(page*(quantity/event.target.value)))
                 setQuantity(event.target.value)
                 }}>
                 <option value={10}>10</option>
