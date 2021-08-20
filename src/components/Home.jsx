@@ -35,7 +35,7 @@ const Home = () => {
 
     if (loading) return (
         <Grid container justify='center'>
-            <CircularProgress color='primary' size={120}/>)
+            <CircularProgress color='primary' size={120}/>
         </Grid>
     )
 
@@ -47,7 +47,7 @@ const Home = () => {
                 Civilizations
             </Typography>
             <TableContainer component={Paper}>
-                <Table>
+                <Table style={{backgroundColor:"#222222"}}>
                     <TableHead>
                         <TableRow>
                             <TableCell>
@@ -106,9 +106,9 @@ const Home = () => {
                     setPage(Math.floor(page*(quantity/event.target.value)))
                     setQuantity(event.target.value)
                     }}>
-                    <MenuItem value={10}>10</MenuItem>
-                    <MenuItem value={20}>20</MenuItem>
-                    <MenuItem value={30}>30</MenuItem>
+                    <MenuItem style={{backgroundColor:"#222222"}} value={10}>10</MenuItem>
+                    <MenuItem style={{backgroundColor:"#222222"}} value={20}>20</MenuItem>
+                    <MenuItem style={{backgroundColor:"#222222"}} value={30}>30</MenuItem>
                 </Select>
             </Grid>
         </Fragment>

@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, Fragment} from 'react'
 import {useParams} from 'react-router-dom'
 
-import {CircularProgress, Grid} from '@material-ui/core'
+import {CircularProgress, Grid, Typography} from '@material-ui/core'
 
 const Civilization = () => {
 
@@ -27,27 +27,45 @@ const Civilization = () => {
 
     if (loading) return (
         <Grid container justify='center'>
-            <CircularProgress color='primary' size={120}/>)
+            <CircularProgress color='primary' size={120}/>
         </Grid>
     )
 
     civilization.name && (document.title = civilization.name)
 
     return (
-        <div>
-            <h3>{civilization.name}</h3><br/>
-            <p><b>Expansion:</b> {civilization.expansion}</p>
-            <p><b>Army Type:</b> {civilization.army_type}</p>
-            <p><b>Team Bonus:</b> {civilization.team_bonus}</p>
-            <p><b>Civilization Bonus:</b></p>
-            <ul>
-                {
-                    civilization.civilization_bonus && civilization.civilization_bonus.map(item => (
-                        <li>{item}</li>
-                    ))
-                }
-            </ul>
-        </div>
+        <Fragment>
+            <Typography variant='h4' color='primary' gutterBottom>
+                {civilization.name}
+            </Typography>
+            <Typography variant='h6' color='primary'>
+                <b>Expansion: </b>
+            </Typography>
+            <Typography variant='body1' paragraph>
+                    {civilization.expansion}
+            </Typography>
+            <Typography variant='h6' color='primary'>
+                <b>Army Type: </b>
+            </Typography>
+            <Typography variant='body1' paragraph>
+                    {civilization.army_type}
+            </Typography>
+            <Typography variant='h6' color='primary'>
+                <b>Team Bonus: </b>
+            </Typography>
+            <Typography variant='body1' paragraph>
+                    {civilization.team_bonus}
+            </Typography>
+            <Typography variant='h6' color='primary'>
+                <b>Civilization Bonus: </b>
+            </Typography>{
+                civilization.civilization_bonus && civilization.civilization_bonus.map(item => (
+                    <Typography variant='body1'>
+                        {item}
+                    </Typography>
+                ))
+            }
+        </Fragment>
     )
 }
 
